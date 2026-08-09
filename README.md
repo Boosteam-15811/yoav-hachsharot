@@ -18,8 +18,32 @@ from a blank `FtcRobotController` checkout.
     example subsystem).
   - `opmodes/teleop/BlueMainTeleop.kt` and `opmodes/teleop/RedMainTeleop.kt` — identical except
     each constructs its `RobotContainer` with the matching `Alliance` (`Blue`/`Red`).
-  - `opmodes/autonomous/MainAutonomous.kt` — minimal OpMode that constructs a `RobotContainer` and
-    hands control to the command scheduler.
+  - `opmodes/autonomous/MainAutonomous.kt` — constructs a `RobotContainer` and schedules an example
+    RoadRunner trajectory to prove the drivetrain works end to end.
+  - `subsystems/drive/` — `DriveSubsystem` wraps RoadRunner's Mecanum drive (see below) for
+    field/robot-centric teleop driving and `actionBuilder()` for autonomous trajectories.
+  - `roadrunner/` — a Kotlin port of the official RoadRunner FTC quickstart, simplified to
+    Mecanum+Pinpoint only (see below).
+
+## RoadRunner
+
+`roadrunner/MecanumDrive.kt` handles kinematics, pose tracking (via a goBILDA Pinpoint —
+`roadrunner/PinpointLocalizer.kt`), and PID/feedforward trajectory following. Before trajectories
+will track accurately you need to tune `MecanumDrive.PARAMS` (and `PinpointLocalizer.PARAMS` for
+the pod offsets) for your robot:
+
+1. Deploy the code and open the Driver Station's OpMode list — you'll see the `quickstart` group
+   with `MecanumMotorDirectionDebugger`, `ForwardPushTest`/`LateralPushTest`,
+   `ForwardRampLogger`/`LateralRampLogger`/`AngularRampLogger`, `ManualFeedforwardTuner`, and
+   `ManualFeedbackTuner`, registered by `roadrunner/tuning/TuningOpModes.kt`.
+2. Follow the tuning steps at [rr.brott.dev/docs/v1-0/tuning](https://rr.brott.dev/docs/v1-0/tuning/)
+   in that order, editing the corresponding `PARAMS` fields (visible/editable live in FTC
+   Dashboard) as you go.
+3. `roadrunner/tuning/SplineTest.kt` and `LocalizationTest.kt` are useful smoke tests once tuned.
+
+To schedule a trajectory from a command-based OpMode, build it from `DriveSubsystem.actionBuilder()`
+and convert it to a `Command` with AlonLib's `Action.asCommand()` (see `MainAutonomous.kt` for an
+example) instead of `Actions.runBlocking` (which is for plain `LinearOpMode`s only).
 
 ## Adding a real mechanism
 

@@ -10,7 +10,10 @@ import org.firstinspires.ftc.robotcore.external.Telemetry
 import org.firstinspires.ftc.teamcode.alonlib.TelemetryLevel
 import org.firstinspires.ftc.teamcode.alonlib.units.Alliance
 import org.firstinspires.ftc.teamcode.commands.defaultExampleCommand
+import org.firstinspires.ftc.teamcode.commands.driveFieldCentricCommand
+import org.firstinspires.ftc.teamcode.commands.resetImuCommand
 import org.firstinspires.ftc.teamcode.commands.runAtFullPowerCommand
+import org.firstinspires.ftc.teamcode.subsystems.drive.DriveSubsystem
 import org.firstinspires.ftc.teamcode.subsystems.example.ExampleSubsystem
 
 /*
@@ -31,6 +34,7 @@ class RobotContainer(
     val controllerB = GamepadEx(gamepad2)
 
     // --- Subsystem declaration ---
+    val driveSubsystem = DriveSubsystem(hardwareMap, telemetry, telemetryLevel)
     val exampleSubsystem = ExampleSubsystem(hardwareMap, telemetry, telemetryLevel)
 
     // --- init functions ---
@@ -42,6 +46,7 @@ class RobotContainer(
     fun configureButtonBindings() {
         with(controllerA) {
             GamepadButton(this, GamepadKeys.Button.A).whenPressed(exampleSubsystem.runAtFullPowerCommand())
+            GamepadButton(this, GamepadKeys.Button.OPTIONS).whenPressed(driveSubsystem.resetImuCommand())
         }
         with(controllerB) {
 
@@ -49,6 +54,10 @@ class RobotContainer(
     }
 
     fun setDefaultCommands() {
+        driveSubsystem.defaultCommand = driveSubsystem.driveFieldCentricCommand(
+            { controllerA.leftX },
+            { controllerA.leftY }
+        ) { controllerA.rightX }
         exampleSubsystem.defaultCommand = exampleSubsystem.defaultExampleCommand()
     }
 }

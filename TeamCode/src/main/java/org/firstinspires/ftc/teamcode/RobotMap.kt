@@ -19,6 +19,16 @@ object RobotMap {
         val EXAMPLE_MOTOR_TYPE = Motor.GoBILDA.RPM_435
     }
 
+    object Drive {
+        const val PINPOINT_ID = "pinpoint"
+        const val FRONT_LEFT_MOTOR_ID = "front left motor" // port 0 on the control hub
+        const val FRONT_RIGHT_MOTOR_ID = "front right motor" // port 1 on the control hub
+        const val BACK_LEFT_MOTOR_ID = "back left motor" // port 2 on the control hub
+        const val BACK_RIGHT_MOTOR_ID = "back right motor" // port 3 on the control hub
+
+        val DRIVE_MOTOR_TYPE = Motor.GoBILDA.RPM_435
+    }
+
     // Add one object per subsystem here as you build out the robot, e.g.:
     //
     // object Intake {

@@ -32,5 +32,5 @@ dependencies {
     implementation libs.solverslib.core
     implementation project(':FtcRobotController')
     implementation libs.androidx.core.ktx
-    implementation 'com.github.alonHamb:AlonLib:v1.1.0'
+    implementation 'com.github.alonHamb:AlonLib:v1.2.0'
 }
