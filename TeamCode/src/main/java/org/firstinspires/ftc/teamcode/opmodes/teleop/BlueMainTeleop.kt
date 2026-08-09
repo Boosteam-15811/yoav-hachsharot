@@ -9,8 +9,8 @@ import org.firstinspires.ftc.teamcode.RobotContainer
 import org.firstinspires.ftc.teamcode.alonlib.TelemetryLevel
 import org.firstinspires.ftc.teamcode.alonlib.units.Alliance
 
-@TeleOp(name = "Main Teleop", group = "Teleop")
-class MainTeleop : CommandOpMode() {
+@TeleOp(name = "Blue Main Teleop", group = "Teleop")
+class BlueMainTeleop : CommandOpMode() {
     lateinit var hub: LynxModule
 
     override fun initialize() {

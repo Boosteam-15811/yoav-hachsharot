@@ -16,8 +16,10 @@ from a blank `FtcRobotController` checkout.
     `ExampleConstants.kt`).
   - `commands/ExampleCommands.kt` — a template command-factory file (extension functions on the
     example subsystem).
-  - `opmodes/teleop/MainTeleop.kt` and `opmodes/autonomous/MainAutonomous.kt` — minimal OpModes
-    that construct a `RobotContainer` and hand control to the command scheduler.
+  - `opmodes/teleop/BlueMainTeleop.kt` and `opmodes/teleop/RedMainTeleop.kt` — identical except
+    each constructs its `RobotContainer` with the matching `Alliance` (`Blue`/`Red`).
+  - `opmodes/autonomous/MainAutonomous.kt` — minimal OpMode that constructs a `RobotContainer` and
+    hands control to the command scheduler.
 
 ## Adding a real mechanism
 
