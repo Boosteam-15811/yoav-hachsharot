@@ -9,20 +9,17 @@ import com.acmerobotics.roadrunner.Vector2d
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp
 import org.firstinspires.ftc.teamcode.RobotMap
-import org.firstinspires.ftc.teamcode.alonlib.TelemetryLevel
 import org.firstinspires.ftc.teamcode.alonlib.hardware.sensors.HaPinPoint
-import org.firstinspires.ftc.teamcode.alonlib.throttleTo
 import org.firstinspires.ftc.teamcode.roadrunner.Drawing
 import org.firstinspires.ftc.teamcode.roadrunner.MecanumDrive
 import org.firstinspires.ftc.teamcode.subsystems.drive.DriveConstants.PINPOINT_ODOMETRY_PODS
-
 
 /** Drives with gamepad1 while streaming the pose estimate to telemetry and the dashboard field view. */
 @TeleOp(group = TuningOpModes.GROUP)
 class LocalizationTest : LinearOpMode() {
     override fun runOpMode() {
         telemetry = MultipleTelemetry(telemetry, FtcDashboard.getInstance().telemetry)
-        telemetry.throttleTo(TelemetryLevel.Testing)
+        telemetry.msTransmissionInterval = 50
 
         val pinPoint = HaPinPoint(hardwareMap, RobotMap.Drive.PINPOINT_ID, PINPOINT_ODOMETRY_PODS)
         val drive = MecanumDrive(hardwareMap, pinPoint, Pose2d(0.0, 0.0, 0.0))

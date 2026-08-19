@@ -1,5 +1,8 @@
 [versions]
 agp = "9.1.0"
+alonlib = "v1.2.0"
+ftcControlHubEmulator = "v1.0.2"
+junit = "4.13.2"
 kotlin = "1.9.24"
 ftc-sdk = "11.1.0"
 dashboard = "0.5.1"
@@ -15,6 +18,8 @@ targetSdk = "34"
 
 [libraries]
 # FTC SDK
+alonlib = { module = "com.github.alonHamb:AlonLib", version.ref = "alonlib" }
+ftc-control-hub-emulator = { module = "com.github.alonHamb:ftc-control-hub-emulator", version.ref = "ftcControlHubEmulator" }
 ftc-inspection = { group = "org.firstinspires.ftc", name = "Inspection", version.ref = "ftc-sdk" }
 ftc-blocks = { group = "org.firstinspires.ftc", name = "Blocks", version.ref = "ftc-sdk" }
 ftc-robotcore = { group = "org.firstinspires.ftc", name = "RobotCore", version.ref = "ftc-sdk" }
@@ -32,6 +37,7 @@ androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "core-ktx" }
 
 # Others
+junit = { module = "junit:junit", version.ref = "junit" }
 solverslib-core = { group = "org.solverslib", name = "core", version.ref = "solverslib" }
 
 [bundles]

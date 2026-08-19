@@ -7,20 +7,18 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp
 import com.seattlesolvers.solverslib.command.CommandOpMode
 import org.firstinspires.ftc.teamcode.RobotContainer
 import org.firstinspires.ftc.teamcode.alonlib.TelemetryLevel
-import org.firstinspires.ftc.teamcode.alonlib.throttleTo
 import org.firstinspires.ftc.teamcode.alonlib.units.Alliance
 
 @TeleOp(name = "Blue Main Teleop", group = "Teleop")
 class BlueMainTeleop : CommandOpMode() {
-    lateinit var hub: LynxModule
+    var hub: LynxModule? = null
 
     override fun initialize() {
         hub = hardwareMap.get(LynxModule::class.java, "Control Hub").apply {
             bulkCachingMode = LynxModule.BulkCachingMode.MANUAL
         }
-        val telemetryLevel = TelemetryLevel.Testing
         telemetry = MultipleTelemetry(telemetry, FtcDashboard.getInstance().telemetry)
-        telemetry.throttleTo(telemetryLevel)
+        telemetry.msTransmissionInterval = 50
         telemetry.addLine("Robot initializing")
         RobotContainer(
             hardwareMap,
@@ -28,13 +26,13 @@ class BlueMainTeleop : CommandOpMode() {
             gamepad1,
             gamepad2,
             Alliance.Blue,
-            telemetryLevel
-        )
+            TelemetryLevel.Testing
+                      )
         telemetry.update()
     }
 
     override fun run() {
-        hub.clearBulkCache()
+        hub?.clearBulkCache()
         super.run()
         telemetry.update()
     }

@@ -15,7 +15,7 @@ apply from: '../build.dependencies.gradle'
 
 android {
     namespace = 'org.firstinspires.ftc.teamcode'
-    
+
     kotlinOptions {
         jvmTarget = '1.8'
     }
@@ -26,11 +26,30 @@ android {
         }
         jniLibs.useLegacyPackaging true
     }
+
+    // Local unit tests (src/test) run on the host JVM against a "mockable" android.jar that
+    // returns default values (0/null/false) instead of throwing on Android API calls. That's
+    // what makes the desktop OpMode emulator in src/test/.../emulator possible -- see its README.
+    testOptions {
+        unitTests {
+            returnDefaultValues = true
+            all {
+                // AGP's unit test JVM runs with -Djava.awt.headless=true by default, which
+                // silently makes JFrame/Swing windows never appear -- needed for the interactive
+                // desktop emulator in src/test/.../emulator (RealEmulatorLauncherTest).
+                systemProperty 'java.awt.headless', 'false'
+            }
+        }
+    }
 }
 
 dependencies {
     implementation libs.solverslib.core
     implementation project(':FtcRobotController')
     implementation libs.androidx.core.ktx
-    implementation 'com.github.alonHamb:AlonLib:v1.2.1'
+    implementation libs.ftc.control.hub.emulator
+    implementation libs.alonlib
+
+    testImplementation libs.ftc.control.hub.emulator
+    testImplementation libs.junit
 }
