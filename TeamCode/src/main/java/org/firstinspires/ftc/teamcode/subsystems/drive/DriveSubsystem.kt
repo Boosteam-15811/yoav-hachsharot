@@ -1,14 +1,14 @@
 package org.firstinspires.ftc.teamcode.subsystems.drive
 
 import com.acmerobotics.dashboard.config.Config
-import com.acmerobotics.roadrunner.Pose2d
 import com.acmerobotics.roadrunner.PoseVelocity2d
-import com.acmerobotics.roadrunner.Rotation2d
 import com.acmerobotics.roadrunner.TrajectoryActionBuilder
 import com.acmerobotics.roadrunner.Vector2d
 import com.qualcomm.robotcore.hardware.HardwareMap
 import com.seattlesolvers.solverslib.command.SubsystemBase
 import com.seattlesolvers.solverslib.drivebase.MecanumDrive
+import com.seattlesolvers.solverslib.geometry.Pose2d
+import com.seattlesolvers.solverslib.hardware.motors.Motor
 import org.firstinspires.ftc.robotcore.external.Telemetry
 import org.firstinspires.ftc.teamcode.RobotMap.Drive.BACK_LEFT_MOTOR_ID
 import org.firstinspires.ftc.teamcode.RobotMap.Drive.BACK_RIGHT_MOTOR_ID
@@ -19,7 +19,11 @@ import org.firstinspires.ftc.teamcode.RobotMap.Drive.PINPOINT_ID
 import org.firstinspires.ftc.teamcode.alonlib.TelemetryLevel
 import org.firstinspires.ftc.teamcode.alonlib.hardware.motors.HaMotor
 import org.firstinspires.ftc.teamcode.alonlib.hardware.sensors.HaPinPoint
+import org.firstinspires.ftc.teamcode.alonlib.units.toRoadRunner
 import org.firstinspires.ftc.teamcode.subsystems.drive.DriveConstants.PINPOINT_ODOMETRY_PODS
+import org.firstinspires.ftc.teamcode.subsystems.drive.DriveConstants.PINPOINT_X_OFFSET
+import org.firstinspires.ftc.teamcode.subsystems.drive.DriveConstants.PINPOINT_Y_OFFSET
+import org.firstinspires.ftc.teamcode.roadrunner.MecanumDrive as RoadrunnerMecanumDrive
 
 /**
  * [MecanumDrive.PARAMS] defaults to placeholders -- tune it first via
@@ -31,24 +35,40 @@ class DriveSubsystem(
     val hardwareMap: HardwareMap,
     val telemetry: Telemetry,
     val telemetryLevel: TelemetryLevel
-) : SubsystemBase() {
+                    ) : SubsystemBase() {
     // --- hardware declaration ---
-    val frontLeftMotor = HaMotor(hardwareMap, FRONT_LEFT_MOTOR_ID, DRIVE_MOTOR_TYPE)
-    val frontRightMotor = HaMotor(hardwareMap, FRONT_RIGHT_MOTOR_ID, DRIVE_MOTOR_TYPE)
-    val backLeftMotor = HaMotor(hardwareMap, BACK_LEFT_MOTOR_ID, DRIVE_MOTOR_TYPE)
-    val backRightMotor = HaMotor(hardwareMap, BACK_RIGHT_MOTOR_ID, DRIVE_MOTOR_TYPE)
-    val pinPoint = HaPinPoint(hardwareMap, PINPOINT_ID, PINPOINT_ODOMETRY_PODS)
+    val frontLeftMotor = HaMotor(hardwareMap, FRONT_LEFT_MOTOR_ID, DRIVE_MOTOR_TYPE).apply {
+        zeroPowerBehavior = Motor.ZeroPowerBehavior.FLOAT
+        runningDirection = Motor.Direction.FORWARD
+        runMode = Motor.RunMode.VelocityControl
+    }
+    val frontRightMotor = HaMotor(hardwareMap, FRONT_RIGHT_MOTOR_ID, DRIVE_MOTOR_TYPE).apply {
+        zeroPowerBehavior = Motor.ZeroPowerBehavior.FLOAT
+        runningDirection = Motor.Direction.FORWARD
+        runMode = Motor.RunMode.VelocityControl
+    }
+    val backLeftMotor = HaMotor(hardwareMap, BACK_LEFT_MOTOR_ID, DRIVE_MOTOR_TYPE).apply {
+        zeroPowerBehavior = Motor.ZeroPowerBehavior.FLOAT
+        runningDirection = Motor.Direction.FORWARD
+        runMode = Motor.RunMode.VelocityControl
+    }
+    val backRightMotor = HaMotor(hardwareMap, BACK_RIGHT_MOTOR_ID, DRIVE_MOTOR_TYPE).apply {
+        zeroPowerBehavior = Motor.ZeroPowerBehavior.FLOAT
+        runningDirection = Motor.Direction.FORWARD
+        runMode = Motor.RunMode.VelocityControl
+    }
+    val pinPoint = HaPinPoint(hardwareMap, PINPOINT_ID, PINPOINT_ODOMETRY_PODS).apply {
+        xOffset = PINPOINT_X_OFFSET
+        yOffset = PINPOINT_Y_OFFSET
+    }
 
     // --- functional properties ---
-    val roadRunnerDrive = org.firstinspires.ftc.teamcode.roadrunner.MecanumDrive(hardwareMap, pinPoint, Pose2d(0.0, 0.0, 0.0))
+    val roadRunnerDrive = RoadrunnerMecanumDrive(hardwareMap, pinPoint, Pose2d(0.0, 0.0, 0.0).toRoadRunner())
     val drive = MecanumDrive(frontLeftMotor.motor, frontRightMotor.motor, backLeftMotor.motor, backRightMotor.motor)
 
     // --- operation functions ---
     fun fieldCentricDrive(xSpeed: Double, ySpeed: Double, turnSpeed: Double) {
-        val heading = roadRunnerDrive.localizer.pose.heading
-        val robotRelative = Rotation2d.fromDouble(-heading.log()).times(Vector2d(xSpeed, ySpeed))
-        roadRunnerDrive.setDrivePowers(PoseVelocity2d(robotRelative, turnSpeed))
-        roadRunnerDrive.updatePoseEstimate()
+        drive.driveFieldCentric(xSpeed, ySpeed, turnSpeed, pinPoint.heading.degrees)
     }
 
     fun robotCentricDrive(xSpeed: Double, ySpeed: Double, turnSpeed: Double) {
@@ -57,12 +77,12 @@ class DriveSubsystem(
     }
 
     fun resetPose(pose: Pose2d) {
-        roadRunnerDrive.localizer.pose = pose
+        roadRunnerDrive.localizer.pose = pose.toRoadRunner()
+        pinPoint.position = pose
     }
 
     fun resetImu() {
-        val current = roadRunnerDrive.localizer.pose
-        resetPose(Pose2d(current.position.x, current.position.y, 0.0))
+        pinPoint.resetIMU()
     }
 
     /** Builds a RoadRunner trajectory starting from the current pose estimate. */
@@ -72,13 +92,13 @@ class DriveSubsystem(
     fun updateTelemetry() {
         when (telemetryLevel) {
             TelemetryLevel.Competition -> {}
-            TelemetryLevel.Testing -> {
+            TelemetryLevel.Testing     -> {
                 telemetry.addLine("--- drive subsystem ---")
                 telemetry.addData("Running Command", super.currentCommand)
                 telemetry.addData(
                     "pose",
                     "x: ${pinPoint.position.x}, y: ${pinPoint.position.y}, heading (deg): ${pinPoint.heading.degrees}"
-                )
+                                 )
             }
         }
     }

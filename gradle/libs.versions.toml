@@ -1,6 +1,6 @@
 [versions]
 agp = "9.1.0"
-alonlib = "v1.2.0"
+alonlib = "v1.2.4"
 ftcControlHubEmulator = "v1.0.2"
 junit = "4.13.2"
 kotlin = "1.9.24"
