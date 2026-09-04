@@ -1,14 +1,15 @@
 package org.firstinspires.ftc.teamcode.subsystems.example
 
 import com.qualcomm.robotcore.hardware.HardwareMap
-import com.seattlesolvers.solverslib.command.SubsystemBase
-import com.seattlesolvers.solverslib.hardware.motors.Motor
 import org.firstinspires.ftc.robotcore.external.Telemetry
 import org.firstinspires.ftc.teamcode.RobotMap.Example.EXAMPLE_MOTOR_ID
 import org.firstinspires.ftc.teamcode.RobotMap.Example.EXAMPLE_MOTOR_TYPE
 import org.firstinspires.ftc.teamcode.alonlib.TelemetryLevel
+import org.firstinspires.ftc.teamcode.alonlib.commands.SubsystemBase
+import org.firstinspires.ftc.teamcode.alonlib.hardware.Data
 import org.firstinspires.ftc.teamcode.alonlib.hardware.motors.HaMotor
-import org.firstinspires.ftc.teamcode.alonlib.units.PercentOutput
+import org.firstinspires.ftc.teamcode.alonlib.units.Percentage
+
 
 /**
  * Template subsystem wrapping a single motor.
@@ -24,13 +25,13 @@ class ExampleSubsystem(
 ) : SubsystemBase() {
     // --- hardware declaration ---
     val motor = HaMotor(hardwareMap, EXAMPLE_MOTOR_ID, EXAMPLE_MOTOR_TYPE).apply {
-        zeroPowerBehavior = Motor.ZeroPowerBehavior.BRAKE
-        runningDirection = Motor.Direction.FORWARD
-        runMode = Motor.RunMode.RawPower
+        zeroPowerBehavior = Data.Motors.ZeroPowerBehavior.BRAKE
+        runningDirection = Data.Motors.Direction.FORWARD
+        runMode = Data.Motors.RunMode.RAW_POWER
     }
 
     // --- operation functions ---
-    fun setMotorPower(power: PercentOutput) {
+    fun setMotorPower(power: Percentage) {
         motor.percentOutput = power
     }
 
@@ -44,7 +45,7 @@ class ExampleSubsystem(
             TelemetryLevel.Competition -> {}
             TelemetryLevel.Testing -> {
                 telemetry.addLine("--- example subsystem ---")
-                telemetry.addData("Running Command", super.currentCommand)
+                telemetry.addData("Running Command", super.currentCommand())
                 telemetry.addData("motor power", motor.percentOutput)
             }
         }

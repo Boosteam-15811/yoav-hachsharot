@@ -44,12 +44,11 @@ android {
 }
 
 dependencies {
-    implementation libs.solverslib.core
     implementation project(':FtcRobotController')
     implementation libs.androidx.core.ktx
-    implementation libs.ftc.control.hub.emulator
+    implementation libs.alonlib.emulator
     implementation libs.alonlib
 
-    testImplementation libs.ftc.control.hub.emulator
     testImplementation libs.junit
+    testImplementation libs.alonlib.emulator
 }

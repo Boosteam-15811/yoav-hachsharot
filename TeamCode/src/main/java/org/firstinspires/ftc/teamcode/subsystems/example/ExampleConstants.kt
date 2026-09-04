@@ -1,5 +1,7 @@
 package org.firstinspires.ftc.teamcode.subsystems.example
 
+import org.firstinspires.ftc.teamcode.alonlib.units.percent
+
 object ExampleConstants {
-    const val EXAMPLE_POWER_LEVEL = 1.0
+    val EXAMPLE_POWER_LEVEL = 100.percent
 }

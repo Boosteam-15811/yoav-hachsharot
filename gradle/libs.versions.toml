@@ -1,7 +1,7 @@
 [versions]
 agp = "9.1.0"
-alonlib = "v1.2.4"
-ftcControlHubEmulator = "v1.0.2"
+alonlib = "v11.2.6"
+alonlibEmulator = "v11.2.6"
 junit = "4.13.2"
 kotlin = "1.9.24"
 ftc-sdk = "11.1.0"
@@ -11,7 +11,7 @@ core-ktx = "1.15.0"
 solverslib = "0.3.4"
 
 # SDK Versions
-compileSdk = "35"
+compileSdk = "37"
 minSdk = "24"
 #noinspection ExpiredTargetSdkVersion
 targetSdk = "34"
@@ -19,9 +19,11 @@ targetSdk = "34"
 [libraries]
 # FTC SDK
 alonlib = { module = "com.github.alonHamb:AlonLib", version.ref = "alonlib" }
-ftc-control-hub-emulator = { module = "com.github.alonHamb:ftc-control-hub-emulator", version.ref = "ftcControlHubEmulator" }
+alonlib-emulator = { module = "com.github.alonHamb.AlonLib:alonlib-emulator", version.ref = "alonlibEmulator" }
+
 ftc-inspection = { group = "org.firstinspires.ftc", name = "Inspection", version.ref = "ftc-sdk" }
 ftc-blocks = { group = "org.firstinspires.ftc", name = "Blocks", version.ref = "ftc-sdk" }
+#noinspection Aligned16KB
 ftc-robotcore = { group = "org.firstinspires.ftc", name = "RobotCore", version.ref = "ftc-sdk" }
 ftc-robotserver = { group = "org.firstinspires.ftc", name = "RobotServer", version.ref = "ftc-sdk" }
 ftc-onbotjava = { group = "org.firstinspires.ftc", name = "OnBotJava", version.ref = "ftc-sdk" }

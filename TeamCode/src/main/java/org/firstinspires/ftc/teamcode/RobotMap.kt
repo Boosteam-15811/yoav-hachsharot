@@ -1,6 +1,7 @@
 package org.firstinspires.ftc.teamcode
 
-import com.seattlesolvers.solverslib.hardware.motors.Motor
+import org.firstinspires.ftc.teamcode.alonlib.hardware.Data
+
 
 object RobotMap {
 
@@ -16,7 +17,7 @@ object RobotMap {
 
     object Example {
         const val EXAMPLE_MOTOR_ID = "example motor" // port 0 on the control hub
-        val EXAMPLE_MOTOR_TYPE = Motor.GoBILDA.RPM_435
+        val EXAMPLE_MOTOR_TYPE = Data.Motors.GoBILDA.RPM_435
     }
 
     object Drive {
@@ -26,7 +27,7 @@ object RobotMap {
         const val BACK_LEFT_MOTOR_ID = "back left motor" // port 2 on the control hub
         const val BACK_RIGHT_MOTOR_ID = "back right motor" // port 3 on the control hub
 
-        val DRIVE_MOTOR_TYPE = Motor.GoBILDA.RPM_435
+        val DRIVE_MOTOR_TYPE = Data.Motors.GoBILDA.RPM_435
     }
 
     // Add one object per subsystem here as you build out the robot, e.g.:
