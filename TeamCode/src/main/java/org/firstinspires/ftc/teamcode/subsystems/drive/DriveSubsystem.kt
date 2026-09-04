@@ -65,7 +65,7 @@ class DriveSubsystem(
         yOffset = PINPOINT_Y_OFFSET
     }
 
-    // --- functional properties ---
+    // --- properties ---
     val roadRunnerDrive =
         RoadrunnerMecanumDrive(hardwareMap, pinPoint, Pose2d(0.0, 0.0, 0.0.degrees).toRoadRunner())
     val drive = MecanumDrive(
