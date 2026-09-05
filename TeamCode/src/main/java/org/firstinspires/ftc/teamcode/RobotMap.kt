@@ -30,6 +30,21 @@ object RobotMap {
         val DRIVE_MOTOR_TYPE = Data.Motors.GoBILDA.RPM_435
     }
 
+    object Elevator{
+        const val LEFT_MOTOR_ID = "left elevator motor"
+        const val RIGHT_MOTOR_ID = "right elevator motor"
+        val MOTOR_TYPE = Data.Motors.GoBILDA.RPM_435
+    }
+
+    object Intake{
+        const val EXTENSION_MOTOR_ID = "intake motor"
+        const val LEFT_ANGLE_SERVO_ID = "left angle servo"
+        const val RIGHT_ANGLE_SERVO_ID = "right angle servo"
+        const val LEFT_INTAKE_SERVO_ID = "left intake servo"
+        const val RIGHT_INTAKE_SERVO_ID = "right intake servo"
+        val MOTOR_TYPE = Data.Motors.GoBILDA.RPM_84
+    }
+
     // Add one object per subsystem here as you build out the robot, e.g.:
     //
     // object Intake {

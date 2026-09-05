@@ -6,8 +6,11 @@ import org.firstinspires.ftc.robotcore.external.Telemetry
 import org.firstinspires.ftc.teamcode.alonlib.TelemetryLevel
 import org.firstinspires.ftc.teamcode.alonlib.gamepad.GamepadEx
 import org.firstinspires.ftc.teamcode.alonlib.units.Alliance
+import org.firstinspires.ftc.teamcode.commands.DefaultCommand
 import org.firstinspires.ftc.teamcode.commands.defaultExampleCommand
 import org.firstinspires.ftc.teamcode.commands.driveFieldCentricCommand
+import org.firstinspires.ftc.teamcode.subsystems.Elevator.ElevatorSubsystem
+import org.firstinspires.ftc.teamcode.subsystems.Intake.IntakeSubsystem
 import org.firstinspires.ftc.teamcode.subsystems.drive.DriveSubsystem
 import org.firstinspires.ftc.teamcode.subsystems.example.ExampleSubsystem
 
@@ -31,6 +34,8 @@ class RobotContainer(
     // --- Subsystem declaration ---
     val driveSubsystem = DriveSubsystem(hardwareMap, telemetry, telemetryLevel)
     val exampleSubsystem = ExampleSubsystem(hardwareMap, telemetry, telemetryLevel)
+    val elevatorSubsystem = ElevatorSubsystem(hardwareMap, telemetry, telemetryLevel)
+    val intakeSubsystem = IntakeSubsystem(hardwareMap, telemetry,telemetryLevel)
 
     // --- init functions ---
     init {
@@ -39,6 +44,7 @@ class RobotContainer(
     }
 
     fun configureButtonBindings() {
+
 
     }
 
@@ -49,5 +55,7 @@ class RobotContainer(
                 { controllerA.leftY }
             ) { controllerA.rightX })
         exampleSubsystem.setDefaultCommand(exampleSubsystem.defaultExampleCommand())
+        elevatorSubsystem.setDefaultCommand(elevatorSubsystem.DefaultCommand())
+
     }
 }
