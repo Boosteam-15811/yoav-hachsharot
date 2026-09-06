@@ -6,7 +6,6 @@
 
 plugins {
     id 'com.android.application'
-    id 'org.jetbrains.kotlin.android'
 }
 
 // Include common definitions from above.
@@ -16,9 +15,6 @@ apply from: '../build.dependencies.gradle'
 android {
     namespace = 'org.firstinspires.ftc.teamcode'
 
-    kotlinOptions {
-        jvmTarget = '1.8'
-    }
 
     packagingOptions {
         jniLibs {
@@ -33,7 +29,7 @@ android {
     testOptions {
         unitTests {
             returnDefaultValues = true
-            all {
+            configureEach {
                 // AGP's unit test JVM runs with -Djava.awt.headless=true by default, which
                 // silently makes JFrame/Swing windows never appear -- needed for the interactive
                 // desktop emulator in src/test/.../emulator (RealEmulatorLauncherTest).
@@ -41,6 +37,9 @@ android {
             }
         }
     }
+}
+
+kotlin {
 }
 
 dependencies {
