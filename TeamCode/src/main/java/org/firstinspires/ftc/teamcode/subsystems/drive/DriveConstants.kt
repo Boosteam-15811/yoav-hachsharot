@@ -1,7 +1,7 @@
 package org.firstinspires.ftc.teamcode.subsystems.drive
 
 import com.qualcomm.hardware.gobilda.GoBildaPinpointDriver
-import org.firstinspires.ftc.teamcode.alonlib.units.millimeters
+import alonlib.units.millimeters
 
 /**
  * Pod-offset and encoder-direction configuration for the Pinpoint lives in

@@ -15,7 +15,6 @@ apply from: '../build.dependencies.gradle'
 android {
     namespace = 'org.firstinspires.ftc.teamcode'
 
-
     packagingOptions {
         jniLibs {
             pickFirsts += ['**/*.so']
@@ -29,25 +28,11 @@ android {
     testOptions {
         unitTests {
             returnDefaultValues = true
-            configureEach {
-                // AGP's unit test JVM runs with -Djava.awt.headless=true by default, which
-                // silently makes JFrame/Swing windows never appear -- needed for the interactive
-                // desktop emulator in src/test/.../emulator (RealEmulatorLauncherTest).
-                systemProperty 'java.awt.headless', 'false'
-            }
         }
     }
-}
-
-kotlin {
 }
 
 dependencies {
     implementation project(':FtcRobotController')
     implementation libs.androidx.core.ktx
-    implementation libs.alonlib.emulator
-    implementation libs.alonlib
-
-    testImplementation libs.junit
-    testImplementation libs.alonlib.emulator
 }

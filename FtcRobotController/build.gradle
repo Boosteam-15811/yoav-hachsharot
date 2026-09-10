@@ -6,14 +6,12 @@ plugins {
 
 android {
     namespace = 'com.qualcomm.ftcrobotcontroller'
-    compileSdk {
-        version = libs.versions.compileSdk.get().toInteger()
-    }
+    compileSdk = libs.versions.compileSdk.get().toInteger()
 
     defaultConfig {
-        minSdk libs.versions.minSdk.get().toInteger()
+        minSdk = libs.versions.minSdk.get().toInteger()
         //noinspection ExpiredTargetSdkVersion
-        targetSdk libs.versions.targetSdk.get().toInteger()
+        targetSdk = libs.versions.targetSdk.get().toInteger()
 
         buildConfigField "String", "APP_BUILD_TIME", '"' + (new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ", Locale.ROOT).format(new Date())) + '"'
     }
@@ -28,13 +26,11 @@ android {
     }
 
     lint {
-        targetSdk libs.versions.targetSdk.get().toInteger()
+        targetSdk = libs.versions.targetSdk.get().toInteger()
     }
 
     testOptions {
-        targetSdk {
-            version = libs.versions.targetSdk.get().toInteger()
-        }
+        targetSdk = libs.versions.targetSdk.get().toInteger()
     }
 }
 

@@ -1,6 +1,6 @@
 package org.firstinspires.ftc.teamcode.commands
 
-import org.firstinspires.ftc.teamcode.alonlib.commands.Command
+import alonlib.commands.Command
 import org.firstinspires.ftc.teamcode.subsystems.drive.DriveSubsystem
 
 fun DriveSubsystem.driveFieldCentricCommand(

@@ -5,7 +5,7 @@ import com.acmerobotics.roadrunner.Vector2d
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode
 import org.firstinspires.ftc.teamcode.RobotMap
-import org.firstinspires.ftc.teamcode.alonlib.hardware.sensors.HaPinPoint
+import alonlib.hardware.sensors.HaPinPoint
 import org.firstinspires.ftc.teamcode.roadrunner.MecanumDrive
 import org.firstinspires.ftc.teamcode.roadrunner.runBlocking
 import org.firstinspires.ftc.teamcode.subsystems.drive.DriveConstants.PINPOINT_ODOMETRY_PODS

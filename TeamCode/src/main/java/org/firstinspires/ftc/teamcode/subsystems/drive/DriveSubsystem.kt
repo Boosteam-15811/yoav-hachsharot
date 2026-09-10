@@ -12,24 +12,23 @@ import org.firstinspires.ftc.teamcode.RobotMap.Drive.DRIVE_MOTOR_TYPE
 import org.firstinspires.ftc.teamcode.RobotMap.Drive.FRONT_LEFT_MOTOR_ID
 import org.firstinspires.ftc.teamcode.RobotMap.Drive.FRONT_RIGHT_MOTOR_ID
 import org.firstinspires.ftc.teamcode.RobotMap.Drive.PINPOINT_ID
-import org.firstinspires.ftc.teamcode.alonlib.TelemetryLevel
-import org.firstinspires.ftc.teamcode.alonlib.commands.SubsystemBase
-import org.firstinspires.ftc.teamcode.alonlib.drives.MecanumDrive
-import org.firstinspires.ftc.teamcode.alonlib.hardware.Data
-import org.firstinspires.ftc.teamcode.alonlib.hardware.Data.Motors.Direction.FORWARD
-import org.firstinspires.ftc.teamcode.alonlib.hardware.Data.Motors.ZeroPowerBehavior.FLOAT
-import org.firstinspires.ftc.teamcode.alonlib.hardware.motors.HaMotor
-import org.firstinspires.ftc.teamcode.alonlib.hardware.sensors.HaPinPoint
-import org.firstinspires.ftc.teamcode.alonlib.math.geometry.Pose2d
-import org.firstinspires.ftc.teamcode.alonlib.units.degrees
-import org.firstinspires.ftc.teamcode.alonlib.units.toRoadRunner
+import alonlib.TelemetryLevel
+import alonlib.commands.SubsystemBase
+import alonlib.drives.HaMecanumDrive
+import alonlib.hardware.Data
+import alonlib.hardware.Data.Motors.Direction.Forward
+import alonlib.hardware.motors.HaMotor
+import alonlib.hardware.sensors.HaPinPoint
+import alonlib.math.geometry.Pose2d
+import alonlib.units.degrees
+import org.firstinspires.ftc.teamcode.roadrunner.toRoadRunner
 import org.firstinspires.ftc.teamcode.subsystems.drive.DriveConstants.PINPOINT_ODOMETRY_PODS
 import org.firstinspires.ftc.teamcode.subsystems.drive.DriveConstants.PINPOINT_X_OFFSET
 import org.firstinspires.ftc.teamcode.subsystems.drive.DriveConstants.PINPOINT_Y_OFFSET
 import org.firstinspires.ftc.teamcode.roadrunner.MecanumDrive as RoadrunnerMecanumDrive
 
 /**
- * [MecanumDrive.PARAMS] defaults to placeholders -- tune it first via
+ * [RoadrunnerMecanumDrive.PARAMS] defaults to placeholders -- tune it first via
  * [org.firstinspires.ftc.teamcode.roadrunner.tuning.TuningOpModes] or trajectories won't track
  * accurately.
  */
@@ -41,24 +40,24 @@ class DriveSubsystem(
 ) : SubsystemBase() {
     // --- hardware declaration ---
     val frontLeftMotor = HaMotor(hardwareMap, FRONT_LEFT_MOTOR_ID, DRIVE_MOTOR_TYPE).apply {
-        zeroPowerBehavior = FLOAT
-        runningDirection = FORWARD
-        runMode = Data.Motors.RunMode.VELOCITY_CONTROL
+        zeroPowerBehavior = Data.Motors.ZeroPowerBehavior.Float
+        runningDirection = Forward
+        runMode = Data.Motors.RunMode.VelocityControl
     }
     val frontRightMotor = HaMotor(hardwareMap, FRONT_RIGHT_MOTOR_ID, DRIVE_MOTOR_TYPE).apply {
-        zeroPowerBehavior = FLOAT
-        runningDirection = FORWARD
-        runMode = Data.Motors.RunMode.VELOCITY_CONTROL
+        zeroPowerBehavior = Data.Motors.ZeroPowerBehavior.Float
+        runningDirection = Forward
+        runMode = Data.Motors.RunMode.VelocityControl
     }
     val backLeftMotor = HaMotor(hardwareMap, BACK_LEFT_MOTOR_ID, DRIVE_MOTOR_TYPE).apply {
-        zeroPowerBehavior = FLOAT
-        runningDirection = FORWARD
-        runMode = Data.Motors.RunMode.VELOCITY_CONTROL
+        zeroPowerBehavior = Data.Motors.ZeroPowerBehavior.Float
+        runningDirection = Forward
+        runMode = Data.Motors.RunMode.VelocityControl
     }
     val backRightMotor = HaMotor(hardwareMap, BACK_RIGHT_MOTOR_ID, DRIVE_MOTOR_TYPE).apply {
-        zeroPowerBehavior = FLOAT
-        runningDirection = FORWARD
-        runMode = Data.Motors.RunMode.VELOCITY_CONTROL
+        zeroPowerBehavior = Data.Motors.ZeroPowerBehavior.Float
+        runningDirection = Forward
+        runMode = Data.Motors.RunMode.VelocityControl
     }
     val pinPoint = HaPinPoint(hardwareMap, PINPOINT_ID, PINPOINT_ODOMETRY_PODS).apply {
         xOffset = PINPOINT_X_OFFSET
@@ -68,7 +67,7 @@ class DriveSubsystem(
     // --- properties ---
     val roadRunnerDrive =
         RoadrunnerMecanumDrive(hardwareMap, pinPoint, Pose2d(0.0, 0.0, 0.0.degrees).toRoadRunner())
-    val drive = MecanumDrive(
+    val drive = HaMecanumDrive(
         frontLeftMotor,
         frontRightMotor,
         backLeftMotor,

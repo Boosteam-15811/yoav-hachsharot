@@ -1,28 +1,26 @@
 [versions]
 agp = "9.1.1"
-alonlib = "v11.2.6"
-alonlibEmulator = "v11.2.6"
-junit = "4.13.2"
+alonlib = "1.0.2"
 kotlin = "2.4.10"
 ftc-sdk = "11.2.1"
 dashboard = "0.5.1"
+roadrunner-core = "1.0.1"
+roadrunner-ftc = "0.1.25"
 appcompat = "1.8.0"
 core-ktx = "1.19.0"
 
 # SDK Versions
-compileSdk = "36"
+compileSdk = "37"
 minSdk = "36"
 #noinspection OldTargetApi,ExpiredTargetSdkVersion
 targetSdk = "36"
 
 [libraries]
-# FTC SDK
 alonlib = { module = "com.github.alonHamb:AlonLib", version.ref = "alonlib" }
-alonlib-emulator = { module = "com.github.alonHamb.AlonLib:alonlib-emulator", version.ref = "alonlibEmulator" }
 
+# FTC SDK
 ftc-inspection = { group = "org.firstinspires.ftc", name = "Inspection", version.ref = "ftc-sdk" }
 ftc-blocks = { group = "org.firstinspires.ftc", name = "Blocks", version.ref = "ftc-sdk" }
-#noinspection Aligned16KB,Aligned16KB
 ftc-robotcore = { group = "org.firstinspires.ftc", name = "RobotCore", version.ref = "ftc-sdk" }
 ftc-robotserver = { group = "org.firstinspires.ftc", name = "RobotServer", version.ref = "ftc-sdk" }
 ftc-onbotjava = { group = "org.firstinspires.ftc", name = "OnBotJava", version.ref = "ftc-sdk" }
@@ -33,12 +31,14 @@ ftc-vision = { group = "org.firstinspires.ftc", name = "Vision", version.ref = "
 # Dashboard
 acmerobotics-dashboard = { group = "com.acmerobotics.dashboard", name = "dashboard", version.ref = "dashboard" }
 
+# RoadRunner
+roadrunner-core = { group = "com.acmerobotics.roadrunner", name = "core", version.ref = "roadrunner-core" }
+roadrunner-actions = { group = "com.acmerobotics.roadrunner", name = "actions", version.ref = "roadrunner-core" }
+roadrunner-ftc = { group = "com.acmerobotics.roadrunner", name = "ftc", version.ref = "roadrunner-ftc" }
+
 # AndroidX
 androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "core-ktx" }
-
-# Others
-junit = { module = "junit:junit", version.ref = "junit" }
 
 [bundles]
 ftc-sdk = [
@@ -50,6 +50,11 @@ ftc-sdk = [
     "ftc-hardware",
     "ftc-ftccommon",
     "ftc-vision"
+]
+roadrunner = [
+    "roadrunner-core",
+    "roadrunner-actions",
+    "roadrunner-ftc"
 ]
 
 [plugins]

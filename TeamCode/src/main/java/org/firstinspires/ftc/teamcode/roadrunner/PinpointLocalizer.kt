@@ -8,7 +8,7 @@ import com.acmerobotics.roadrunner.Vector2d
 import com.qualcomm.hardware.gobilda.GoBildaPinpointDriver
 import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit
 import org.firstinspires.ftc.robotcore.external.navigation.UnnormalizedAngleUnit
-import org.firstinspires.ftc.teamcode.alonlib.hardware.sensors.HaPinPoint
+import alonlib.hardware.sensors.HaPinPoint
 
 /**
  * Wraps an already-constructed [HaPinPoint] as a RoadRunner [Localizer], so the same physical

@@ -8,7 +8,7 @@ import java.util.regex.Pattern
 // to avoid classpath conflicts with the plugins block.
 
 android {
-    compileSdk 37
+    compileSdk = libs.versions.compileSdk.get().toInteger()
 
     signingConfigs {
         release {
