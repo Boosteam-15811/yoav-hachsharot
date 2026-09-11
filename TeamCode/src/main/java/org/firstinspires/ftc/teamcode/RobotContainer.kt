@@ -1,11 +1,11 @@
 package org.firstinspires.ftc.teamcode
 
+import alonlib.TelemetryLevel
+import alonlib.gamepad.GamepadEx
+import alonlib.units.Alliance
 import com.qualcomm.robotcore.hardware.Gamepad
 import com.qualcomm.robotcore.hardware.HardwareMap
 import org.firstinspires.ftc.robotcore.external.Telemetry
-import org.firstinspires.ftc.teamcode.alonlib.TelemetryLevel
-import org.firstinspires.ftc.teamcode.alonlib.gamepad.GamepadEx
-import org.firstinspires.ftc.teamcode.alonlib.units.Alliance
 import org.firstinspires.ftc.teamcode.commands.DefaultCommand
 import org.firstinspires.ftc.teamcode.commands.defaultExampleCommand
 import org.firstinspires.ftc.teamcode.commands.driveFieldCentricCommand
@@ -21,41 +21,41 @@ import org.firstinspires.ftc.teamcode.subsystems.example.ExampleSubsystem
   and bind any buttons/triggers to it in [configureButtonBindings]
  */
 class RobotContainer(
-    hardwareMap: HardwareMap,
-    telemetry: Telemetry,
-    gamepad1: Gamepad,
-    gamepad2: Gamepad,
-    val alliance: Alliance,
-    telemetryLevel: TelemetryLevel
+	hardwareMap: HardwareMap,
+	telemetry: Telemetry,
+	gamepad1: Gamepad,
+	gamepad2: Gamepad,
+	val alliance: Alliance,
+	telemetryLevel: TelemetryLevel
 ) {
-    val controllerA: GamepadEx = GamepadEx(gamepad1)
-    val controllerB: GamepadEx = GamepadEx(gamepad2)
 
-    // --- Subsystem declaration ---
-    val driveSubsystem = DriveSubsystem(hardwareMap, telemetry, telemetryLevel)
-    val exampleSubsystem = ExampleSubsystem(hardwareMap, telemetry, telemetryLevel)
-    val elevatorSubsystem = ElevatorSubsystem(hardwareMap, telemetry, telemetryLevel)
-    val intakeSubsystem = IntakeSubsystem(hardwareMap, telemetry,telemetryLevel)
+	val controllerA: GamepadEx = GamepadEx(gamepad1)
+	val controllerB: GamepadEx = GamepadEx(gamepad2)
 
-    // --- init functions ---
-    init {
-        configureButtonBindings()
-        setDefaultCommands()
-    }
+	// --- Subsystem declaration ---
+	val driveSubsystem = DriveSubsystem(hardwareMap, telemetry, telemetryLevel)
+	val exampleSubsystem = ExampleSubsystem(hardwareMap, telemetry, telemetryLevel)
+	val elevatorSubsystem = ElevatorSubsystem(hardwareMap, telemetry, telemetryLevel)
+	val intakeSubsystem = IntakeSubsystem(hardwareMap, telemetry, telemetryLevel)
 
-    fun configureButtonBindings() {
+	// --- init functions ---
+	init {
+		configureButtonBindings()
+		setDefaultCommands()
+	}
 
+	fun configureButtonBindings() {
 
-    }
+	}
 
-    fun setDefaultCommands() {
-        driveSubsystem.setDefaultCommand(
-            driveSubsystem.driveFieldCentricCommand(
-                { controllerA.leftX },
-                { controllerA.leftY }
-            ) { controllerA.rightX })
-        exampleSubsystem.setDefaultCommand(exampleSubsystem.defaultExampleCommand())
-        elevatorSubsystem.setDefaultCommand(elevatorSubsystem.DefaultCommand())
+	fun setDefaultCommands() {
+		driveSubsystem.setDefaultCommand(
+			driveSubsystem.driveFieldCentricCommand(
+				{ controllerA.leftX },
+				{ controllerA.leftY }
+			) { controllerA.rightX })
+		exampleSubsystem.setDefaultCommand(exampleSubsystem.defaultExampleCommand())
+		elevatorSubsystem.setDefaultCommand(elevatorSubsystem.DefaultCommand())
 
-    }
+	}
 }

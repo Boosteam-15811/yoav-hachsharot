@@ -1,81 +1,74 @@
 package org.firstinspires.ftc.teamcode.subsystems.Elevator
 
+import alonlib.TelemetryLevel
+import alonlib.commands.SubsystemBase
+import alonlib.hardware.Data
+import alonlib.hardware.motors.HaMotor
+import alonlib.math.geometry.AngularPositon
+import alonlib.units.amps
+import alonlib.units.compareTo
+import alonlib.units.degrees
+import alonlib.units.volts
 import com.qualcomm.robotcore.hardware.HardwareMap
-import emulator.hardware.ZeroPowerBehavior
 import org.firstinspires.ftc.robotcore.external.Telemetry
 import org.firstinspires.ftc.teamcode.RobotMap.Elevator.LEFT_MOTOR_ID
 import org.firstinspires.ftc.teamcode.RobotMap.Elevator.MOTOR_TYPE
 import org.firstinspires.ftc.teamcode.RobotMap.Elevator.RIGHT_MOTOR_ID
-import org.firstinspires.ftc.teamcode.alonlib.TelemetryLevel
-import org.firstinspires.ftc.teamcode.alonlib.commands.SubsystemBase
-import org.firstinspires.ftc.teamcode.alonlib.hardware.Data
-import org.firstinspires.ftc.teamcode.alonlib.hardware.motors.HaMotor
-import org.firstinspires.ftc.teamcode.alonlib.math.geometry.Rotation2d
-import org.firstinspires.ftc.teamcode.alonlib.units.Length
-import org.firstinspires.ftc.teamcode.alonlib.units.amps
-import org.firstinspires.ftc.teamcode.alonlib.units.compareTo
-import org.firstinspires.ftc.teamcode.alonlib.units.degrees
-import org.firstinspires.ftc.teamcode.alonlib.units.percent
-import org.firstinspires.ftc.teamcode.alonlib.units.volts
 
-class ElevatorSubsystem(val hardwareMap: HardwareMap, val telemetry: Telemetry, val telemetryLevel: TelemetryLevel):
-    SubsystemBase()
-{
-    // --- hardware declarations ---
-    val leftMotor = HaMotor(hardwareMap, LEFT_MOTOR_ID, MOTOR_TYPE).apply {
-        runningDirection = Data.Motors.Direction.FORWARD
-        zeroPowerBehavior = Data.Motors.ZeroPowerBehavior.FLOAT
-        runMode = Data.Motors.RunMode.POSITION_CONTROL
-    }
-    val rightMotor = HaMotor(hardwareMap, RIGHT_MOTOR_ID, MOTOR_TYPE,leftMotor).apply {
-        runningDirection = Data.Motors.Direction.REVERSE
-        zeroPowerBehavior = Data.Motors.ZeroPowerBehavior.FLOAT
-        runMode = Data.Motors.RunMode.POSITION_CONTROL
-    }
+class ElevatorSubsystem(hardwareMap: HardwareMap, val telemetry: Telemetry, val telemetryLevel: TelemetryLevel) :
+	SubsystemBase() {
 
-    // --- getters and setters ---
-    val currentPosition : Rotation2d
-        get() = rightMotor.position
+	// --- hardware declarations ---
+	val leftMotor = HaMotor(hardwareMap, LEFT_MOTOR_ID, MOTOR_TYPE).apply {
+		runningDirection = Data.Motors.Direction.Forward
+		zeroPowerBehavior = Data.Motors.ZeroPowerBehavior.Float
+		runMode = Data.Motors.RunMode.PositionControl
+	}
+	val rightMotor = HaMotor(hardwareMap, RIGHT_MOTOR_ID, MOTOR_TYPE, leftMotor).apply {
+		runningDirection = Data.Motors.Direction.Reverse
+		zeroPowerBehavior = Data.Motors.ZeroPowerBehavior.Float
+		runMode = Data.Motors.RunMode.PositionControl
+	}
 
-    var positionSetpoint : Rotation2d
-        get() = rightMotor.position
-        set(setpoint) {
-            rightMotor.position = setpoint
-        }
+	// --- getters and setters ---
+	val currentPosition: AngularPositon
+		get() = rightMotor.angularPosition
+	var positionSetpoint: AngularPositon
+		get() = rightMotor.angularPosition
+		set(setpoint) {
+			rightMotor.angularPosition = setpoint
+		}
 
-    var maxPosition : Rotation2d = 200.degrees
-    val isAtMaxLimit : Boolean
-        get() {
-           return currentPosition > maxPosition
-        }
-    var minPosition : Rotation2d = 5.degrees
-    val  isAtMinLimit : Boolean
-        get() = currentPosition < minPosition
+	var maxPosition: AngularPositon = 200.degrees
+	val isAtMaxLimit: Boolean
+		get() {
+			return currentPosition > maxPosition
+		}
+	var minPosition: AngularPositon = 5.degrees
+	val isAtMinLimit: Boolean
+		get() = currentPosition < minPosition
 
-    fun homing()
-    {
-        while (rightMotor.current <= 7.amps)
-        {
-            rightMotor.voltage = 6.volts
-        }
-        rightMotor.maximumPosition = currentPosition
-    }
+	fun homing() {
+		while (rightMotor.current <= 7.amps) {
+			rightMotor.voltage = 6.volts
+		}
+		rightMotor.maximumAngle = currentPosition
+	}
 
-    fun telemetryUpdate()
-    {
-        telemetry.addLine("--- Elevator Subsystem ---")
-        telemetry.addLine("Running Command: ${super.currentCommand()}")
-        telemetry.addLine("Current Position: $currentPosition")
-        telemetry.addLine("Position SetPoint: $positionSetpoint")
-        telemetry.addLine("Master Motor Power: ${rightMotor.percentOutput.asFraction}")
-        telemetry.addLine("Slave Motor Power: ${leftMotor.percentOutput.asFraction}")
-        telemetry.addLine("is At Max Limit: $isAtMaxLimit")
-        telemetry.addLine("is At Min Limit: $isAtMinLimit")
-    }
+	fun telemetryUpdate() {
+		telemetry.addLine("--- Elevator Subsystem ---")
+		telemetry.addLine("Running Command: ${super.currentCommand()}")
+		telemetry.addLine("Current Position: $currentPosition")
+		telemetry.addLine("Position SetPoint: $positionSetpoint")
+		telemetry.addLine("Master Motor Power: ${rightMotor.percentOutput.asFraction}")
+		telemetry.addLine("Slave Motor Power: ${leftMotor.percentOutput.asFraction}")
+		telemetry.addLine("is At Max Limit: $isAtMaxLimit")
+		telemetry.addLine("is At Min Limit: $isAtMinLimit")
+	}
 
-    override fun periodic() {
-        rightMotor.update()
-        leftMotor.update()
-        telemetryUpdate()
-    }
+	override fun periodic() {
+		rightMotor.update()
+		leftMotor.update()
+		telemetryUpdate()
+	}
 }
