@@ -1,7 +1,6 @@
 [versions]
 agp = "9.1.0"
-alonlib = "v11.2.6"
-alonlibEmulator = "v11.2.6"
+alonlib = "1.0.2"
 junit = "4.13.2"
 kotlin = "1.9.24"
 ftc-sdk = "11.1.0"
