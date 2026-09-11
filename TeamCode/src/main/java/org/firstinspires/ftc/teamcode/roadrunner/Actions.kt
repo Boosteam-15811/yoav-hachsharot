@@ -12,7 +12,7 @@ fun now(): Double = System.nanoTime() * 1e-9
  * Dashboard each cycle -- equivalent to RoadRunner's own `Actions.runBlocking`, used by the
  * tuning LinearOpModes ([tuning.ManualFeedbackTuner], [tuning.SplineTest]). Regular autonomous
  * code should prefer scheduling the action as a command via
- * [org.firstinspires.ftc.teamcode.alonlib.commands.asCommand] instead.
+ * [alonlib.commands.asCommand] instead.
  */
 fun runBlocking(action: Action) {
     val dashboard = FtcDashboard.getInstance()

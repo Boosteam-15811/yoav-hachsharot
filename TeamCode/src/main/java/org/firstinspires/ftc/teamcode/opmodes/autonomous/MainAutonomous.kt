@@ -5,10 +5,10 @@ import com.acmerobotics.dashboard.telemetry.MultipleTelemetry
 import com.qualcomm.hardware.lynx.LynxModule
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous
 import org.firstinspires.ftc.teamcode.RobotContainer
-import org.firstinspires.ftc.teamcode.alonlib.TelemetryLevel
-import org.firstinspires.ftc.teamcode.alonlib.commands.CommandOpMode
-import org.firstinspires.ftc.teamcode.alonlib.commands.asCommand
-import org.firstinspires.ftc.teamcode.alonlib.units.Alliance
+import alonlib.TelemetryLevel
+import alonlib.commands.CommandOpMode
+import alonlib.units.Alliance
+import org.firstinspires.ftc.teamcode.roadrunner.asCommand
 
 /**
  * TODO: replace the example trajectory below with your actual autonomous routine (this just

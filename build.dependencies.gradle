@@ -6,8 +6,14 @@
 dependencies {
     // FTC SDK Bundle
     implementation libs.bundles.ftc.sdk
-    
+
     // Dashboard and UI
     implementation libs.acmerobotics.dashboard
     implementation libs.androidx.appcompat
+
+    // RoadRunner
+    implementation libs.bundles.roadrunner
+
+    // AlonLib
+    implementation libs.alonlib
 }

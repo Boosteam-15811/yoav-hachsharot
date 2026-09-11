@@ -4,11 +4,11 @@ import com.qualcomm.robotcore.hardware.HardwareMap
 import org.firstinspires.ftc.robotcore.external.Telemetry
 import org.firstinspires.ftc.teamcode.RobotMap.Example.EXAMPLE_MOTOR_ID
 import org.firstinspires.ftc.teamcode.RobotMap.Example.EXAMPLE_MOTOR_TYPE
-import org.firstinspires.ftc.teamcode.alonlib.TelemetryLevel
-import org.firstinspires.ftc.teamcode.alonlib.commands.SubsystemBase
-import org.firstinspires.ftc.teamcode.alonlib.hardware.Data
-import org.firstinspires.ftc.teamcode.alonlib.hardware.motors.HaMotor
-import org.firstinspires.ftc.teamcode.alonlib.units.Percentage
+import alonlib.TelemetryLevel
+import alonlib.commands.SubsystemBase
+import alonlib.hardware.Data
+import alonlib.hardware.motors.HaMotor
+import alonlib.units.Percentage
 
 
 /**
@@ -25,9 +25,9 @@ class ExampleSubsystem(
 ) : SubsystemBase() {
     // --- hardware declaration ---
     val motor = HaMotor(hardwareMap, EXAMPLE_MOTOR_ID, EXAMPLE_MOTOR_TYPE).apply {
-        zeroPowerBehavior = Data.Motors.ZeroPowerBehavior.BRAKE
-        runningDirection = Data.Motors.Direction.FORWARD
-        runMode = Data.Motors.RunMode.RAW_POWER
+        zeroPowerBehavior = Data.Motors.ZeroPowerBehavior.Brake
+        runningDirection = Data.Motors.Direction.Forward
+        runMode = Data.Motors.RunMode.RawPower
     }
 
     // --- operation functions ---

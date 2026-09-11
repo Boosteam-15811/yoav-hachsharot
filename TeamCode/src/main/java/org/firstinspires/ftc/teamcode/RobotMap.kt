@@ -1,6 +1,6 @@
 package org.firstinspires.ftc.teamcode
 
-import org.firstinspires.ftc.teamcode.alonlib.hardware.Data
+import alonlib.hardware.Data
 
 
 object RobotMap {
