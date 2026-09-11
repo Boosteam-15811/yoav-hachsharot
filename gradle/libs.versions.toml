@@ -1,6 +1,6 @@
 [versions]
 agp = "9.1.1"
-alonlib = "1.0.2"
+alonlib = "1.0.4"
 kotlin = "2.4.10"
 ftc-sdk = "11.2.1"
 dashboard = "0.5.1"
