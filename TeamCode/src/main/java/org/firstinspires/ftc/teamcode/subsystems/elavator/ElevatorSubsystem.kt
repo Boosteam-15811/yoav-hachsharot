@@ -1,12 +1,11 @@
-package org.firstinspires.ftc.teamcode.subsystems.Elevator
+package org.firstinspires.ftc.teamcode.subsystems.elavator
 
 import alonlib.TelemetryLevel
 import alonlib.commands.SubsystemBase
 import alonlib.hardware.Data
 import alonlib.hardware.motors.HaMotor
-import alonlib.math.geometry.AngularPositon
+import alonlib.units.Angle
 import alonlib.units.amps
-import alonlib.units.compareTo
 import alonlib.units.degrees
 import alonlib.units.volts
 import com.qualcomm.robotcore.hardware.HardwareMap
@@ -31,20 +30,20 @@ class ElevatorSubsystem(hardwareMap: HardwareMap, val telemetry: Telemetry, val 
 	}
 
 	// --- getters and setters ---
-	val currentPosition: AngularPositon
+	val currentPosition: Angle
 		get() = rightMotor.angularPosition
-	var positionSetpoint: AngularPositon
+	var positionSetpoint: Angle
 		get() = rightMotor.angularPosition
 		set(setpoint) {
 			rightMotor.angularPosition = setpoint
 		}
 
-	var maxPosition: AngularPositon = 200.degrees
+	var maxPosition: Angle = 200.degrees
 	val isAtMaxLimit: Boolean
 		get() {
 			return currentPosition > maxPosition
 		}
-	var minPosition: AngularPositon = 5.degrees
+	var minPosition: Angle = 5.degrees
 	val isAtMinLimit: Boolean
 		get() = currentPosition < minPosition
 

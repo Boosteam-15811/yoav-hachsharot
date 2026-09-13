@@ -5,8 +5,7 @@ import alonlib.commands.SubsystemBase
 import alonlib.hardware.Data
 import alonlib.hardware.motors.HaMotor
 import alonlib.hardware.servos.HaServo
-import alonlib.math.geometry.AngularPositon
-import alonlib.units.compareTo
+import alonlib.units.Angle
 import com.qualcomm.robotcore.hardware.HardwareMap
 import org.firstinspires.ftc.robotcore.external.Telemetry
 import org.firstinspires.ftc.teamcode.RobotMap.Intake.EXTENSION_MOTOR_ID
@@ -38,16 +37,16 @@ class IntakeSubsystem(hardwareMap: HardwareMap, val telemetry: Telemetry, val te
 	val rightIntakeServo = HaServo(hardwareMap, RIGHT_INTAKE_SERVO_ID, Data.Servos.Mode.Cr, Data.Servos.Type.AxonMax)
 	val leftIntakeServo = HaServo(hardwareMap, LEFT_INTAKE_SERVO_ID, Data.Servos.Mode.Cr, Data.Servos.Type.AxonMax)
 
-	val currentPosition: AngularPositon
+	val currentPosition: Angle
 		get() = rightAngleServo.position
 
-	var currentPositionSetpoint: AngularPositon
+	var currentPositionSetpoint: Angle
 		get() = rightAngleServo.position
 		set(setpoint) {
 			rightAngleServo.position = setpoint
 		}
 
-	var maxPosition: AngularPositon = MAX_ANGLE
+	var maxPosition: Angle = MAX_ANGLE
 
 	val isAtMaxPosition: Boolean
 		get() = currentPosition >= MAX_ANGLE

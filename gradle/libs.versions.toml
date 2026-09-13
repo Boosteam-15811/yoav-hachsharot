@@ -1,8 +1,8 @@
 [versions]
 agp = "9.1.1"
-alonlib = "1.0.4"
-kotlin = "2.4.10"
-ftc-sdk = "11.2.1"
+alonlib = "1.0.5"
+kotlin = "2.4.20"
+ftc-sdk = "12.0.0"
 dashboard = "0.5.1"
 roadrunner-core = "1.0.1"
 roadrunner-ftc = "0.1.25"
